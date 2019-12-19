@@ -18,22 +18,22 @@ export default {
             title: ''
         }
     },
-    methods: {
-        addTodo(e) {
-            e.preventDefault()
+	methods: {
 
-            console.log("TODDO")
-            var idTemp = uuid.v4()
-            var newTodo = {
-                id: uuid.v4(),
-                title: this.title,
-                completed: false,
-            }
-            this.$emit('add-todo', newTodo)
+    addTodo(e) {
+      e.preventDefault()
 
-            this.title = ''
-        }
+			var idTemp = uuid.v4()
+			var newTodo = {
+					id: uuid.v4(),
+					title: this.title,
+					completed: false,
+			}
+			this.$emit('add-todo', newTodo)
+
+			this.title = ''
     }
+  }
 }
 </script>
 

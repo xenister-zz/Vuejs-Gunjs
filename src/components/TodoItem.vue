@@ -15,15 +15,10 @@ export default {
     props: ["todo"],
     methods: {
       
-        markComplete() {
-          console.log("MARKCOMPLETED")
-            this.todo.completed = !this.todo.completed
-            // this.todo.completed = !this.todo.completed
-            //gun.get("Todos").get(this.todo.id).get('completed').put(this.todo.completed) 
-            // gunWeb.get(this.todo.id).get('completed').put(this.todo.completed)
-            this.$emit('mark-completed', this.todo.id, this.todo.completed)
-
-        }
+      markComplete() {
+        this.todo.completed = !this.todo.completed
+        this.$emit('mark-completed', this.todo.id, this.todo.completed)
+      }
     }
 }
 </script>

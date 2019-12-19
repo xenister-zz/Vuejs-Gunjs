@@ -21,8 +21,6 @@ import not from 'gun/lib/not'
 var gun = Gun()
 var gunWeb = gun.get('WebDB').get('Todos')
 
-// src="https://cdn.jsdelivr.net/npm/gun/lib/unset.js"
-
 export default {
   name: 'Home',
   components: {
@@ -35,36 +33,14 @@ export default {
     }
   },
 
-  // gunWeb.get(this.todo.id).get('completed').put(this.todo.completed)
   methods: {
 
     markCompleted(idCompleted, isCompleted) {
-      console.log("MARKCOMPLETED---*-*-*-*-", this.todos)
-
-      // let temp;
-      // for (let i in this.todos) {
-      //   console.log("IN LOOP == ",this.todos[i])
-      //   if (this.todos[i].id == idCompleted) {
-      //     this.todos[i].completed = !this.todos[i].completed 
-      //     temp = this.todos[i].completed
-      //     break;
-      //   }
-      // }
-      // console.log("MARKCOM ==== ", temp)
-      // let temp = gunWeb.get(idCompleted)
-      // console.log("is completed ??? ==" , temp)
-
       gunWeb.get(idCompleted).path('completed').put(isCompleted)
-
-      setTimeout( ()=> {
-        console.log("MARKCOMPLETED---*-*-*-*-", this.todos)
-      }, 3000)
-
       gunWeb.open(console.log)
     },
 
     deleteTodo(id) {
-      
       gunWeb.get(id).put(null)
       this.todos = this.todos.filter( todo => {
           return todo.id !== id
@@ -72,15 +48,11 @@ export default {
     },
 
     addTodo(newTodo) {
-      console.log("Add TODO")
-
       gunWeb.get(newTodo.id).put(newTodo)
     }
   },
 
-
   created() {
-    console.log('IN CREATED GUN')
 
     var defaultTodo = {
       id: uuid.v4(),
@@ -89,42 +61,18 @@ export default {
     }
 
     gunWeb.not( () => {
-      // var defaultCreate = gun.get(idTemp).put(defaultTodo)
       gunWeb.get(defaultTodo.id).put(defaultTodo)
     })
 
     gunWeb.map().val( (elem)=> {
-
-      console.log("in MAP == ", elem)
-
-
-
-      // console.log("ELEM == ", elem)
-
       if (elem !== null) {
         this.todos = [...this.todos, elem]
-        // console.log("Todos Content == ", this.todos)
       }
-      
-      // console.log("Todos OUUUUT ", this.todos)
     })
-    // this.todos = temp
-
-    //gunWeb.open(console.log)
-
-    // setTimeout( ()=> {
-    //     gunWeb.get('866038c5-1778-43ed-b4ec-2ff6dbbc659b').put(null)
-    // }, 3000)
   },
 
-  // created() {
-  //     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=7')
-  //     .then(res => this.todos = res.data)
-  //     .catch(err => console.log(err));
-  // }
-
-
 }
+
 </script>
 
 <style>
