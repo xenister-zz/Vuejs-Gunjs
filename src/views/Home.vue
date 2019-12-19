@@ -38,7 +38,7 @@ export default {
   // gunWeb.get(this.todo.id).get('completed').put(this.todo.completed)
   methods: {
 
-    markCompleted(idCompleted) {
+    markCompleted(idCompleted, isCompleted) {
       console.log("MARKCOMPLETED---*-*-*-*-", this.todos)
 
       // let temp;
@@ -51,14 +51,16 @@ export default {
       //   }
       // }
       // console.log("MARKCOM ==== ", temp)
+      // let temp = gunWeb.get(idCompleted)
+      // console.log("is completed ??? ==" , temp)
 
-      gunWeb.get(idCompleted).path('completed').put(true)
+      gunWeb.get(idCompleted).path('completed').put(isCompleted)
 
       setTimeout( ()=> {
         console.log("MARKCOMPLETED---*-*-*-*-", this.todos)
       }, 3000)
 
-      console.log("MARKCOMPLETED---*-*-*-*-", this.todos)
+      gunWeb.open(console.log)
     },
 
     deleteTodo(id) {
@@ -91,8 +93,14 @@ export default {
       gunWeb.get(defaultTodo.id).put(defaultTodo)
     })
 
-    gunWeb.map((elem)=> {
-      console.log("ELEM == ", elem)
+    gunWeb.map().val( (elem)=> {
+
+      console.log("in MAP == ", elem)
+
+
+
+      // console.log("ELEM == ", elem)
+
       if (elem !== null) {
         this.todos = [...this.todos, elem]
         // console.log("Todos Content == ", this.todos)
@@ -100,7 +108,9 @@ export default {
       
       // console.log("Todos OUUUUT ", this.todos)
     })
-    this.todos = temp
+    // this.todos = temp
+
+    //gunWeb.open(console.log)
 
     // setTimeout( ()=> {
     //     gunWeb.get('866038c5-1778-43ed-b4ec-2ff6dbbc659b').put(null)

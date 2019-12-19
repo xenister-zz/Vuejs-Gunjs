@@ -3,7 +3,7 @@
         <div v-bind:key="todo.id" v-for="todo in todos">
             <TodoItem v-bind:todo="todo" 
                 v-on:del-todo="$emit('del-todo', todo.id)"
-                v-on:mark-completed="$emit('mark-completed', todo.id)"
+                v-on:mark-completed="$emit('mark-completed', todo.id, todo.completed)"
             />
         </div>
     </div>

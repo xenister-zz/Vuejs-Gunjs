@@ -1,7 +1,7 @@
 <template>
     <div v-if='todo.id' class="todo-item" v-bind:class="{'is-complete':todo.completed}">
         <p>
-            <input type="checkbox" v-on:change="markComplete" >
+            <input type="checkbox" v-on:change="markComplete" :checked="todo.completed" >
             {{todo.title}}
             <button @click="$emit('del-todo', todo.id)" class="del">x </button>
         </p>
@@ -21,7 +21,7 @@ export default {
             // this.todo.completed = !this.todo.completed
             //gun.get("Todos").get(this.todo.id).get('completed').put(this.todo.completed) 
             // gunWeb.get(this.todo.id).get('completed').put(this.todo.completed)
-            this.$emit('mark-completed', this.todo.id)
+            this.$emit('mark-completed', this.todo.id, this.todo.completed)
 
         }
     }
